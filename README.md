@@ -30,6 +30,10 @@ The pipeline consists of five main stages:
 4. Hybrid retrieval + generation  
 5. Evaluation  
 
+Diagram:
+<p align="center">
+  <img src="mermaid-diagram.png" width="800"/>
+</p>
 ---
 
 # 1️⃣ Document Ingestion
