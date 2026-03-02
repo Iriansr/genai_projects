@@ -131,3 +131,130 @@ When a query is issued:
 ## Step 3 — Context Assembly
 
 The LLM receives structured and unstructured evidence:
+
+```
+GRAPH FACTS:
+...
+DOCUMENTS:
+...
+```
+
+---
+
+# Why Hybrid?
+
+Pure vector RAG answers:
+
+> "What is a Deployment?"
+
+Hybrid RAG enables:
+
+> "How does a Deployment update Pods?"
+
+This requires multi-hop reasoning:
+
+Deployment → ReplicaSet → Pod
+
+
+The graph layer improves:
+
+- Causal explanations
+- Control-plane reasoning
+- Lifecycle analysis
+- Structured comparisons
+
+---
+
+# 5️⃣ Generation
+
+Generation is performed using:
+
+- Gemini (Vertex AI)
+
+Prompt constraints enforce:
+
+- Use only provided context
+- Prefer conceptual explanations
+- Avoid unsupported claims
+- Use graph paths for causal reasoning
+
+This reduces hallucinations and enforces grounding.
+
+---
+
+# 6️⃣ Evaluation Framework
+
+We use an LLM-as-a-judge methodology.
+
+Each question is scored on:
+
+- Retrieval relevance
+- Groundedness
+- QA accuracy
+- Answer quality
+
+To reduce circular validation bias, the evaluator only sees the **vector-retrieved context**, not the graph context.
+
+---
+
+## 📊 Results (Hybrid RAG)
+
+Average scores across benchmark questions:
+```
+Retrieval Relevance: 4.86
+Groundedness: 5.00
+QA Accuracy: 4.29
+Answer Quality: 4.01
+```
+
+### Observations
+
+- Strong definitional accuracy
+- Excellent grounding (no hallucinations observed)
+- Slight performance drop on structured comparison questions
+- High performance on causal multi-hop reasoning
+
+The evaluation does not produce inflated constant scores (e.g., all 5.0), indicating a sufficiently strict judging process.
+
+---
+
+# 🔬 Key Design Decisions
+
+- Separate vector and graph chunking strategies
+- Dynamic ontology inference to reduce manual schema engineering
+- Multi-hop traversal for controller-level reasoning
+- Strict prompting to reduce hallucination
+- Reproducible experiment logging
+
+---
+
+# ⚠ Limitations
+
+- LLM-as-judge may introduce bias
+- Limited benchmark size
+- Graph extraction depends on LLM consistency
+- Comparative reasoning can degrade without contrast-aware prompting
+
+---
+
+# 🚀 Future Work
+
+- Add vector-only baseline comparison
+- Introduce contrast-aware prompting
+- Expand evaluation benchmark
+- Add statistical dispersion metrics
+- Improve graph extraction stability
+
+---
+
+# Summary
+
+This project demonstrates a production-style hybrid RAG architecture that:
+
+- Integrates semantic and structural retrieval
+- Supports multi-hop reasoning
+- Minimizes hallucinations
+- Provides reproducible evaluation
+- Surfaces realistic system limitations
+
+The system is designed as an experiment-driven reasoning framework over complex technical documentation.
